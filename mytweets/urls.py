@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from tweets.views import Index
+from tweets.views import Index,Profile
+from django.urls import path, re_path
 
 admin.autodiscover()
 
 urlpatterns = [
     path('', Index.as_view()),
     path('admin/', admin.site.urls),
+    re_path(r'^user/(\w+)/$', Profile.as_view())
 ]
