@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from tweets.views import Index,Profile
+from tweets.views import Index
+from user_profile.views import Profile
 from django.urls import path, re_path
 
 admin.autodiscover()

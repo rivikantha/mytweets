@@ -19,5 +19,19 @@ class Tweet(models.Model):
 
 		return self.text
 
+class Hashtag(models.Model):
+
+	"""
+	Hashtag Model
+	"""
+
+	name = models.CharField(max_length=64, unique=True)
+
+	tweet = models.ManyToManyField(Tweet)
+
+	def __str__(self):
+
+		return self.name
+
 
 
