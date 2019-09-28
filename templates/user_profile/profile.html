@@ -4,17 +4,37 @@
 	
 	<div class="row clearfix">
 
-		<div class="col-md-12 column">
+		<div class="col-md-5 column mt-3 ml-3 mb-0">
+
+			<form method="post" action="post/">
+				{% csrf_token %} 
+				{{ form.text.errors }}
+				<div class="form-group purple-border fieldWrapper">
+			    	<label for="{{form.text.id_for_label}}">Tweet</label>
+			    	{{ form.text }}			    	
+				</div>
+
+				<button type="submit" class="btn btn-primary mb-2">Submit</button>
+
+			</form>
+
+
+		</div>
+
+		<h3>&nbsp;</h3>
+
+		<div class="col-md-12 column">			
 
 			{% for tweet in tweets %}
 
-				<div class="well">
-
-					<span>{{ tweet.text }}</span>
-
+				<div class="card w-75 bg-light mt-3 ml-3">
+					<div class="card-body">
+				    	<h5 class="card-title">{{ tweet.created_date }}</h5>
+				    	<p class="card-text">{{ tweet.text }}</p>				    	
+					</div>
 				</div>
-			
-			{% endfor %}
+
+			{% endfor %}			
 
 		</div>		
 

@@ -8,6 +8,8 @@ class Index(View):
 
 	def get(self, request):
 
+		form = NameForm()
+
 		params={}
 
 		params["name"]="Django"
