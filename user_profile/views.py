@@ -18,5 +18,5 @@ class Profile(View):
 		params["tweets"] = tweets
 		params["user"] = user
 		params["name"] = "MyTweets / "+user.username
-		params["form"] = TweetForm()
+		params["form"] = TweetForm(initial={'country': 'Global'})
 		return render(request, 'user_profile/profile.html', params)
