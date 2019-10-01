@@ -61,6 +61,24 @@ class PostTweet(View):
 
 		return HttpResponseRedirect('/user/'+username)
 
+class HashtagCloud(View):
+
+	"""Hash Tag page reachable from /hastag/<hashtag> URL"""
+
+	def get(self, request, hashtag):
+
+		params={}
+
+		hashtag = Hashtag.objects.get(name=hashtag)
+
+		params["tweets"] = hashtag.tweet
+
+		return render(request, 'tweets/hashtag.html', params)
+
+
+
+
+
 					
 			
 		

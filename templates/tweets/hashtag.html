@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<div class="row clearfix">
+		<div class="col-md-12 column">			
+
+			{% for tweet in tweets.all %}
+
+				<div class="card w-75 bg-light mt-3 ml-3">
+					<div class="card-body">
+				    	<h5 class="card-title">{{ tweet.created_date }}</h5>
+				    	<p class="card-text">{{ tweet.text }}</p>				    	
+					</div>
+				</div>
+
+			{% endfor %}			
+
+		</div>		
+
+	</div>
+
+
+{% endblock %}
