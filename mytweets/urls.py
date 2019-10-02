@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from tweets.views import Index, PostTweet, HashtagCloud
+from tweets.views import Index, PostTweet, HashtagCloud, Search
 from user_profile.views import Profile
 from django.urls import path, re_path
 
@@ -26,5 +26,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^user/(\w+)/$', Profile.as_view()),
     re_path(r'^user/(\w+)/post/$',PostTweet.as_view()),
-    re_path(r'^hashtag/(\w+)/$',HashtagCloud.as_view())
+    re_path(r'^hashtag/(\w+)/$',HashtagCloud.as_view()),
+    re_path(r'^search/$', Search.as_view()),
 ]

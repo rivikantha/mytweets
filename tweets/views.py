@@ -5,6 +5,7 @@ from django.views.generic import View
 from user_profile.models import User
 from .models import Tweet
 from .forms import TweetForm
+from .forms import SearchForm
 from .models import Hashtag
 
 class Index(View):
@@ -74,6 +75,23 @@ class HashtagCloud(View):
 		params["tweets"] = hashtag.tweet
 
 		return render(request, 'tweets/hashtag.html', params)
+
+class Search(View):
+
+	"""Search all tweets with query /search/?query=<query> URL"""
+
+	def get(self, request):
+
+		form = SearchForm()
+
+		params = {}
+
+		params['search'] = form
+
+		return render(request,"tweets/search.html",params)
+
+
+
 
 
 
