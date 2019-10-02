@@ -1,0 +1,21 @@
+
+{% for tweet in tweets %}
+
+	<div class="card w-75 bg-light mt-3 ml-3">
+		<div class="card-body">
+	    	<h5 class="card-title">{{ tweet.created_date }}</h5>
+	    	<p class="card-text">{{ tweet.text }}</p>				    	
+		</div>
+	</div>
+
+{% endfor %}
+{% if not tweets %}
+
+	<div class="card w-75 bg-light mt-3 ml-3">
+		<div class="card-body">    	
+	    	<p class="card-text"><span> No Tweet found.</span></p>				    	
+		</div>
+	</div>	
+{% endif %}
+
+

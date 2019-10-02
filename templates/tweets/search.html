@@ -1,21 +1,20 @@
 {% extends "base.html" %}
-{% load staticfiles %}
+{% load static %}
 
 {% block content %}
 
 	<div class="row clearfix">
 
-		<div class="col-md-5 column mt-3 ml-3 mb-0">
+		<div class="col-md-8 column mt-3 ml-3">			
 
-			<form id="search-form" action="." method="post">
-				{% csrf_token %} 
+			<form id="search-form" class="form-inline" action="." method="post">
+				{% csrf_token %}
+
+				<label class="sr-only" for="search-quer">Search tweets</label>
+				{{ search.query.errors }}
+				{{ search.query }}
 				
-				<div class="input-group input-group-sm fieldWrapper">
-			    	{{ search.query.errors }}
-					{{ search.query }}			    	
-				</div>
-				
-				<button type="submit" class="btn btn-search mb-2">Submit</button>
+				<button type="submit" class="btn btn-primary mb-2">Submit</button>
 
 			</form>
 		</div>

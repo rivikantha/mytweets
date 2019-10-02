@@ -5,4 +5,4 @@ class TweetForm(forms.Form):
 	country = forms.CharField(widget=forms.HiddenInput())
 
 class SearchForm(forms.Form):
-	query = forms.CharField(label="Enter a keyword to search for", widget=forms.TextInput(attrs={'size':32,'class':'form-control'}))
+	query = forms.CharField(label="Enter a keyword to search for", widget=forms.TextInput(attrs={'size':32,'class':'form-control mb-2 mr-sm-2', 'id':'search-query', 'placeholder':'search tweets...'}))

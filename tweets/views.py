@@ -1,12 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.template.loader import render_to_string
+from django.template import Context
 from django.views.generic import View 
 from user_profile.models import User
 from .models import Tweet
 from .forms import TweetForm
 from .forms import SearchForm
 from .models import Hashtag
+import json
 
 class Index(View):
 
@@ -89,6 +92,27 @@ class Search(View):
 		params['search'] = form
 
 		return render(request,"tweets/search.html",params)
+
+
+	def post(self, request):
+
+		form = SearchForm(request.POST)
+
+		if form.is_valid():
+
+			query = form.cleaned_data['query']
+			tweets = Tweet.objects.filter(text__icontains=query)
+			context = {"query": query, "tweets": tweets}
+
+			return_str = render_to_string('partials/_tweet_search.html',context)
+
+			return HttpResponse(json.dumps(return_str),content_type="application/json")
+
+		else:
+
+			return HttpResponseRedirect("/search")
+
+
 
 
 
