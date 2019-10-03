@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template.loader import render_to_string
+from django.shortcuts import render_to_response
 from django.template import Context
 from django.views.generic import View 
 from user_profile.models import User
@@ -90,6 +91,16 @@ class Search(View):
 		params = {}
 
 		params['search'] = form
+
+		if 'AJAX' in request.GET:
+
+			query = request.GET.get('query','')
+
+			tweets = Tweet.objects.filter(text__icontains=query)
+
+			context = {"query": query, "tweets": tweets}
+			
+			return render_to_response('partials/_tweet_search.html',context)			
 
 		return render(request,"tweets/search.html",params)
 
