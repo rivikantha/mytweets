@@ -32,4 +32,13 @@ class Hashtag(models.Model):
 		return self.name
 
 
+class UserFollowers(models.Model):
 
+	user = models.ForeignKey(User, unique=True, on_delete=models.CASCADE)
+	date = models.DateTimeField(auto_now_add=True)
+	count = models.IntegerField(default=1)
+	followers = models.ManyToManyField(User,related_name="followers")
+	
+	def __str__(self):
+		return '%s, %s' % self.user, self.count
+	
