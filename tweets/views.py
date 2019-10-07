@@ -11,6 +11,8 @@ from .forms import TweetForm
 from .forms import SearchForm
 from .models import Hashtag
 import json
+from django.contrib.auth import authenticate, login
+
 
 class Index(View):
 
@@ -122,6 +124,57 @@ class Search(View):
 		else:
 
 			return HttpResponseRedirect("/search")
+
+class Login(View):
+
+	def post(self, request):
+
+		username = request.POST['username']
+		password = request.POST['password']
+
+		user = authenticate(request, username=username, password=password)
+
+		if user is not Null:
+
+			login(request, user)
+
+			return HttpResponseRedirect('user/'+user.username)
+		else:
+
+			pass
+
+class MyBackend():
+    
+    def authenticate(self, request, username=None, password=None):
+        
+        try:
+
+        	user = User.objects.get(username=username,password=password)
+
+        	return user
+        	
+        except User.DoesNotExist:
+        	
+        	return None
+        
+
+    def get_user(self,user_id):
+
+    	try:
+
+    		return User.objects.get(pk=user_id)
+
+    	except User.DoesNotExist:
+
+    		return None
+
+
+
+class UserRedirect(View):
+
+	def get(self,request):
+
+		return HttpResponseRedirect('/user/'+ request.user.username)
 
 
 
