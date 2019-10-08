@@ -24,7 +24,7 @@ class Index(View):
 
 		params["name"]="Django"
 
-		return render(request,"base.html",params)
+		return HttpResponseRedirect('login/')
 
 	def post(self, request):
 
@@ -149,9 +149,15 @@ class MyBackend():
         
         try:
 
-        	user = User.objects.get(username=username,password=password)
+        	user = User.objects.get(username=username)
 
-        	return user
+        	if (user.check_password(password)):
+
+        		return user
+
+        	else:
+
+        		return None        	
         	
         except User.DoesNotExist:
         	
