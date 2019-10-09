@@ -18,7 +18,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
 from django.urls import path
 from tweets.views import Index, PostTweet, HashtagCloud, Search, UserRedirect
-from user_profile.views import Profile
+from user_profile.views import Profile,MostFollowedUsers
 from django.urls import path, re_path
 
 admin.autodiscover()
@@ -32,5 +32,6 @@ urlpatterns = [
     re_path(r'^search/$', Search.as_view()),
     path('login/', LoginView.as_view(template_name='registration/login.html'), name="login"),
     path('logout/', LogoutView.as_view(template_name='registration/logout.html'), name="logout"),
-    re_path(r'^profile/$',UserRedirect.as_view())
+    re_path(r'^profile/$',UserRedirect.as_view()),
+    re_path(r'^mostFollowed/',MostFollowedUsers.as_view())
 ]
