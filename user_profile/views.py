@@ -38,6 +38,8 @@ class Profile(LoginRequiredMixin,View):
 
 		tweets = Tweet.objects.filter(user=profile)
 		
+		ipdb.set_trace()
+		
 		params["tweets"] = tweets
 		params['user'] = user
 		params["profile"] = profile

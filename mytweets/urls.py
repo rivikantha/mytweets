@@ -14,8 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
+from django.conf.urls import include, url
 from django.urls import path
 from tweets.views import Index, PostTweet, HashtagCloud, Search, UserRedirect
 from user_profile.views import Profile,MostFollowedUsers
@@ -24,7 +26,7 @@ from django.urls import path, re_path
 admin.autodiscover()
 
 urlpatterns = [
-    path('', Index.as_view()),
+    path('', Index.as_view()),    
     path('admin/', admin.site.urls),
     re_path(r'^user/(\w+)/$', Profile.as_view()),
     re_path(r'^user/(\w+)/post/$',PostTweet.as_view()),
@@ -35,3 +37,14 @@ urlpatterns = [
     re_path(r'^profile/$',UserRedirect.as_view()),
     re_path(r'^mostFollowed/',MostFollowedUsers.as_view())
 ]
+
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+
+        # For django versions before 2.0:
+        # url(r'^__debug__/', include(debug_toolbar.urls)),
+
+    ] + urlpatterns

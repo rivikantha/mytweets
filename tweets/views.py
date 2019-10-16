@@ -12,7 +12,7 @@ from .forms import SearchForm
 from .models import Hashtag
 import json
 from django.contrib.auth import authenticate, login
-
+import ipdb;
 
 class Index(View):
 
